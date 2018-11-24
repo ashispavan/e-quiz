@@ -1,4 +1,8 @@
-# EQuiz
+# E-Quiz : Entertainment Quiz
+
+This is an online Entertainment Quiz created using Angular 7 and Opentdb trivia question database API. You need to score at least 5 out of 10 questions to pass.
+
+Have fun!
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 
