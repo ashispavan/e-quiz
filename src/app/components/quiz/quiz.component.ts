@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { QuizService } from '../../services/quiz.service';
 import uuidv4 from 'uuid/v4';
 
@@ -9,6 +10,8 @@ import uuidv4 from 'uuid/v4';
 })
 export class QuizComponent implements OnInit {
 
+  public userName : string;
+
   public questions : any;
 
   public options : any = {};
@@ -17,16 +20,21 @@ export class QuizComponent implements OnInit {
 
   public correctAnswerCount : number = 0;
 
-  constructor(private quizService: QuizService) { }
+  public loading : boolean;
+
+  constructor(private quizService: QuizService, private router : Router) { }
 
   ngOnInit() {
+    this.loading = true;
     this.fetchQuestions();
+    this.userName = window.localStorage.getItem('userName');
   }
 
   public fetchQuestions() : void {
     this.quizService.getQuizQuestions().subscribe((data) => {
       this.questions = data['results'];
       this.createAnswerOptions();
+      this.loading = false;
     });
   }
 
@@ -60,21 +68,27 @@ export class QuizComponent implements OnInit {
   }
 
   public onChange($event, question) {
+    this.showAnswers = false;
     const id = question.id;
     this.options[id] = $event.value;
     if (this.options[id] === question.correct_answer) {
       this.correctAnswerCount += 1;
     }
-    else {
-      this.correctAnswerCount -= 1;
-    }
-    console.log(this.options);
   }
 
   public onSubmit() : void {
     this.showAnswers = true;
     this.scrollToTop();
     console.log(this.correctAnswerCount);
+  }
+
+  public onRetry() : void {
+    window.location.reload();
+  }
+
+  public onLogout() : void {
+    localStorage.setItem('userName', '');
+    this.router.navigate(['/login']);
   }
 
   public scrollToTop() : void {

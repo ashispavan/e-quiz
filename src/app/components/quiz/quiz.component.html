@@ -1,26 +1,40 @@
-
+<ngx-loading [show]="loading"></ngx-loading>
 <div class="quiz-questions" *ngIf="questions">
+  <div class="top-panel">
     <div class="result">
-        <div class="result-pass" *ngIf="showAnswers && (correctAnswerCount > 5)">
-          You passed!
-        </div>
-        <div class="result-fail" *ngIf="showAnswers && (correctAnswerCount < 5)">
-          You failed!
-        </div>
+      <div class="user" *ngIf="userName">
+        Hello, {{userName}}
       </div>
-    <mat-card matRipple *ngFor="let question of questions;let i=index">
-      <p [innerHTML]="(i+1 + '. ' + question.question) | keepHtml"></p>
-      <mat-radio-group>
-        <mat-radio-button (change)="onChange($event, question)" *ngFor="let option of question.options" [value]="option">
-          {{option}}
-        </mat-radio-button>
-      </mat-radio-group>
-      <div class="error" *ngIf="showIncorrectError(question)">
-        <p>Incorrect Answer. Correct Answer: {{question.correct_answer}}</p>
+      <div class="score" *ngIf="showAnswers">
+        Score: {{correctAnswerCount}}
       </div>
-      <div class="correct" *ngIf="showCorrectMessage(question)">
-        <p>Correct Answer</p>
+      <div class="result-pass" *ngIf="showAnswers && (correctAnswerCount > 5)">
+        You passed!
       </div>
-    </mat-card>
-    <button class="submit" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+      <div class="result-fail" *ngIf="showAnswers && (correctAnswerCount <= 5)">
+        You failed!
+      </div>
+    </div>
+    <div class="actions">
+      <button class="retry" mat-raised-button color="primary" (click)="onRetry()">Retry</button>
+      <button class="logout" mat-raised-button color="primary" (click)="onLogout()">Logout</button>
+    </div>
+  </div>
+
+  <mat-card matRipple *ngFor="let question of questions;let i=index">
+    <p [innerHTML]="(i+1 + '. ' + question.question) | keepHtml"></p>
+    <mat-radio-group>
+      <mat-radio-button [disabled]="showAnswers" (change)="onChange($event, question)" *ngFor="let option of question.options"
+        [value]="option">
+        <span [innerHTML]="option | keepHtml"></span>
+      </mat-radio-button>
+    </mat-radio-group>
+    <div class="error" *ngIf="showIncorrectError(question)">
+      <p>Incorrect Answer. Correct Answer: {{question.correct_answer}}</p>
+    </div>
+    <div class="correct" *ngIf="showCorrectMessage(question)">
+      <p>Correct Answer</p>
+    </div>
+  </mat-card>
+  <button class="submit" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
 </div>

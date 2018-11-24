@@ -11,7 +11,7 @@ const routes: Routes = [
     path: 'quiz', component: QuizComponent
   },
   {
-    path: '', redirectTo: '/login', pathMatch: 'full'
+    path: '**', redirectTo: '/login', pathMatch: 'full'
   }
 ];
 

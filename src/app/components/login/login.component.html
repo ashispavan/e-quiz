@@ -2,13 +2,13 @@
   <mat-card>
       <mat-card-title>LOGIN</mat-card-title>
       <mat-form-field>
-        <input matInput placeholder="Full Name">
+        <input matInput placeholder="Full Name" [(ngModel)]="userName">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Email">
+        <input matInput type="email" placeholder="Email" email>
       </mat-form-field>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+        <button [disabled]="!userName" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
       </mat-card-actions>
   </mat-card>
 </div>
