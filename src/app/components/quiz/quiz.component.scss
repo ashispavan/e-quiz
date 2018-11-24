@@ -1,0 +1,40 @@
+.quiz-questions {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+mat-card {
+    margin: 10px;
+}
+
+mat-radio-group {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-radio-button {
+    margin-bottom: 5px;
+}
+
+.error, .result-fail {
+    color: red;
+}
+
+.correct, .result-pass {
+    color: greenyellow;
+}
+
+.submit {
+    width: 25%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.result {
+    font-size: 30px;
+    padding: 10px;
+}
