@@ -1,0 +1,19 @@
+mat-card {
+    width: 30%;
+    margin: 10px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+mat-form-field {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
